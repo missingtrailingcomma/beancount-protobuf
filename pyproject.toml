@@ -13,5 +13,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "pytest>=9.0.3",
     "types-protobuf>=7.34.1.20260408",
 ]
