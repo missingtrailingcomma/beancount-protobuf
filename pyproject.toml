@@ -1,0 +1,17 @@
+[project]
+name = "beancount-protobuf"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "beancount>=3.2.0",
+    "mypy-protobuf>=5.0.0",
+    "protobuf>=7.34.1",
+    "types-protobuf>=7.34.1.20260408",
+]
+
+[dependency-groups]
+dev = [
+    "types-protobuf>=7.34.1.20260408",
+]

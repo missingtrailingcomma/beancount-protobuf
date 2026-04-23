@@ -1,0 +1,42 @@
+name: Tests
+
+# Triggers the workflow on push (commit) or pull request (submit) to main/master
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12" # Change this to match your project's version
+
+      - name: Install dependencies
+        run: |
+          # If you are using standard uv project management (pyproject.toml):
+          uv sync --all-extras --dev
+          
+          # IF you are NOT using a pyproject.toml, comment out the line above 
+          # and uncomment the lines below to install manually:
+          # uv venv
+          # uv pip install pytest beancount protobuf
+          
+      - name: Run pytest
+        run: |
+          # Run pytest via uv to ensure it uses the correct virtual environment
+          uv run pytest
